@@ -10,6 +10,8 @@
 
 @interface FirstViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIView *videoView;
+
 - (IBAction)playLocalVideo:(id)sender;
 - (IBAction)playRemoteVideo:(id)sender;
 

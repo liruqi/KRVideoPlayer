@@ -44,8 +44,7 @@
 - (void)playVideoWithURL:(NSURL *)url
 {
     if (!self.videoController) {
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        self.videoController = [[KRVideoPlayerController alloc] initWithFrame:CGRectMake(0, 0, width, width*(9.0/16.0))];
+        self.videoController = [[KRVideoPlayerController alloc] initWithFrame:self.videoView.bounds];
         __weak typeof(self)weakSelf = self;
         [self.videoController setDimissCompleteBlock:^{
             weakSelf.videoController = nil;
@@ -53,7 +52,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerWillEnterFullscreen) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerWillExitFullscreen) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
 
-        [self.videoController showInView:self.view];
+        [self.videoController showInView:self.videoView];
     }
     self.videoController.contentURL = url;
 }

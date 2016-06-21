@@ -18,6 +18,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
 @property (nonatomic, assign) BOOL isFullscreenMode;
 @property (nonatomic, assign) CGRect originFrame;
 @property (nonatomic, strong) NSTimer *durationTimer;
+@property (nonatomic, weak) UIView *superView;
 
 @end
 
@@ -57,6 +58,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
 - (void)showInView: (UIView *)v
 {
     [v addSubview:self.view];
+    self.superView = v;
     self.view.alpha = 0.0;
     [UIView animateWithDuration:kVideoPlayerControllerAnimationTimeInterval animations:^{
         self.view.alpha = 1.0;
@@ -176,6 +178,12 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
     CGRect frame = CGRectMake((height - width) / 2, (width - height) / 2, width, height);
     [[NSNotificationCenter defaultCenter] postNotificationName:MPMoviePlayerWillEnterFullscreenNotification object:nil];
     [UIView animateWithDuration:0.3f animations:^{
+        [self.view removeFromSuperview];
+        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+        if (!keyWindow) {
+            keyWindow = [[[UIApplication sharedApplication] windows] firstObject];
+        }
+        [keyWindow addSubview:self.view];
         self.frame = frame;
         [self.view setTransform:CGAffineTransformMakeRotation(M_PI_2)];
     } completion:^(BOOL finished) {
@@ -193,6 +201,8 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:MPMoviePlayerWillExitFullscreenNotification object:nil];
     [UIView animateWithDuration:0.3f animations:^{
+        [self.view removeFromSuperview];
+        [self.superView addSubview:self.view];
         [self.view setTransform:CGAffineTransformIdentity];
         self.frame = self.originFrame;
     } completion:^(BOOL finished) {
