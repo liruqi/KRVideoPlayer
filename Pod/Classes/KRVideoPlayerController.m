@@ -39,7 +39,6 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
         [self.view addSubview:self.videoControl];
         self.videoControl.frame = self.view.bounds;
         [self configObserver];
-        [self configControlAction];
     }
     return self;
 }
@@ -60,6 +59,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
     [v addSubview:self.view];
     self.superView = v;
     self.view.alpha = 0.0;
+    [self configControlAction];
     [UIView animateWithDuration:kVideoPlayerControllerAnimationTimeInterval animations:^{
         self.view.alpha = 1.0;
     } completion:^(BOOL finished) {
@@ -102,13 +102,17 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
 {
     [self.videoControl.playButton addTarget:self action:@selector(playButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.videoControl.pauseButton addTarget:self action:@selector(pauseButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.videoControl.closeButton addTarget:self action:@selector(closeButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.videoControl.fullScreenButton addTarget:self action:@selector(fullScreenButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.videoControl.shrinkScreenButton addTarget:self action:@selector(shrinkScreenButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.videoControl.progressSlider addTarget:self action:@selector(progressSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.videoControl.progressSlider addTarget:self action:@selector(progressSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
     [self.videoControl.progressSlider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside];
     [self.videoControl.progressSlider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpOutside];
+    if (self.dimissCompleteBlock) {
+        [self.videoControl.closeButton addTarget:self action:@selector(closeButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        self.videoControl.closeButton.hidden = YES;
+    }
     [self setProgressSliderMaxMinValues];
     [self monitorVideoPlayback];
 }
