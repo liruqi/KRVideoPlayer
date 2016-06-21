@@ -49,14 +49,24 @@
         __weak typeof(self)weakSelf = self;
         [self.videoController setDimissCompleteBlock:^{
             weakSelf.videoController = nil;
-            weakSelf.tabBarController.tabBar.hidden = NO;
         }];
-        [self.videoController setScreenModeChangedBlock:^(BOOL full) {
-            weakSelf.tabBarController.tabBar.hidden = full;
-        }];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerWillEnterFullscreen) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerWillExitFullscreen) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+
         [self.videoController showInView:self.view];
     }
     self.videoController.contentURL = url;
 }
 
+- (void) playerWillEnterFullscreen {
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+- (void) playerWillExitFullscreen {
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
