@@ -10,11 +10,13 @@
 
 @interface KRVideoPlayerController : MPMoviePlayerController
 
-@property (nonatomic, copy)void(^dimissCompleteBlock)(void);
+@property (nonatomic, copy) void(^dimissCompleteBlock)(void);
+@property (nonatomic, copy) void(^screenModeChangedBlock)(BOOL fullScreen);
+
 @property (nonatomic, assign) CGRect frame;
 
 - (instancetype)initWithFrame:(CGRect)frame;
-- (void)showInWindow;
+- (void)showInView: (UIView *)v;
 - (void)dismiss;
 
 @end

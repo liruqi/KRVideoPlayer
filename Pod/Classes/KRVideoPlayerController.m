@@ -54,13 +54,9 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
 
 #pragma mark - Public Method
 
-- (void)showInWindow
+- (void)showInView: (UIView *)v
 {
-    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-    if (!keyWindow) {
-        keyWindow = [[[UIApplication sharedApplication] windows] firstObject];
-    }
-    [keyWindow addSubview:self.view];
+    [v addSubview:self.view];
     self.view.alpha = 0.0;
     [UIView animateWithDuration:kVideoPlayerControllerAnimationTimeInterval animations:^{
         self.view.alpha = 1.0;
@@ -183,6 +179,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
         [self.view setTransform:CGAffineTransformMakeRotation(M_PI_2)];
     } completion:^(BOOL finished) {
         self.isFullscreenMode = YES;
+        self.screenModeChangedBlock(YES);
         self.videoControl.fullScreenButton.hidden = YES;
         self.videoControl.shrinkScreenButton.hidden = NO;
     }];
@@ -198,6 +195,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
         self.frame = self.originFrame;
     } completion:^(BOOL finished) {
         self.isFullscreenMode = NO;
+        self.screenModeChangedBlock(NO);
         self.videoControl.fullScreenButton.hidden = NO;
         self.videoControl.shrinkScreenButton.hidden = YES;
     }];

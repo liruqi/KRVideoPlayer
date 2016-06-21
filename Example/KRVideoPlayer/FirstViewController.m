@@ -49,8 +49,12 @@
         __weak typeof(self)weakSelf = self;
         [self.videoController setDimissCompleteBlock:^{
             weakSelf.videoController = nil;
+            weakSelf.tabBarController.tabBar.hidden = NO;
         }];
-        [self.videoController showInWindow];
+        [self.videoController setScreenModeChangedBlock:^(BOOL full) {
+            weakSelf.tabBarController.tabBar.hidden = full;
+        }];
+        [self.videoController showInView:self.view];
     }
     self.videoController.contentURL = url;
 }
