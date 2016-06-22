@@ -108,6 +108,8 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
     [self.videoControl.progressSlider addTarget:self action:@selector(progressSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
     [self.videoControl.progressSlider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside];
     [self.videoControl.progressSlider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpOutside];
+    [self.videoControl.volumeButton addTarget:self action:@selector(volumeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.videoControl.volumeButton.highlighted = self.soundOn;
     if (self.dimissCompleteBlock) {
         [self.videoControl.closeButton addTarget:self action:@selector(closeButtonClick) forControlEvents:UIControlEventTouchUpInside];
     } else {
@@ -215,6 +217,15 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
         self.videoControl.shrinkScreenButton.hidden = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:MPMoviePlayerDidExitFullscreenNotification object:nil];
     }];
+}
+
+- (void)volumeButtonClick: (id) sender {
+    if (sender != self.videoControl.volumeButton) return;
+    _soundOn = ! _soundOn;
+    self.videoControl.volumeButton.highlighted = _soundOn;
+    if (self.soundChangedBlock) {
+        self.soundChangedBlock(_soundOn);
+    }
 }
 
 - (void)setProgressSliderMaxMinValues {

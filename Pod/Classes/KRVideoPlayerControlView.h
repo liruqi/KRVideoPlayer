@@ -18,6 +18,7 @@
 @property (nonatomic, strong, readonly) UIButton *shrinkScreenButton;
 @property (nonatomic, strong, readonly) UISlider *progressSlider;
 @property (nonatomic, strong, readonly) UIButton *closeButton;
+@property (nonatomic, strong, readonly) UIButton *volumeButton;
 @property (nonatomic, strong, readonly) UILabel *timeLabel;
 @property (nonatomic, strong, readonly) UIActivityIndicatorView *indicatorView;
 @property (nonatomic) BOOL volume;
