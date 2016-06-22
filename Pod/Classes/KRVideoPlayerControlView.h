@@ -20,6 +20,7 @@
 @property (nonatomic, strong, readonly) UIButton *closeButton;
 @property (nonatomic, strong, readonly) UILabel *timeLabel;
 @property (nonatomic, strong, readonly) UIActivityIndicatorView *indicatorView;
+@property (nonatomic) BOOL volume;
 
 - (void)animateHide;
 - (void)animateShow;

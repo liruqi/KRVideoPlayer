@@ -61,6 +61,10 @@
 		3D7197CF55924FEAAD0B4FE8 /* KRVideoPlayerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = KRVideoPlayerController.m; sourceTree = "<group>"; };
 		4497B197CEE6876576DF0B76 /* libPods-KRVideoPlayer-KRVideoPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KRVideoPlayer-KRVideoPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0F151515C1A9A0B5ABEFC0 /* Pods-KRVideoPlayer-KRVideoPlayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KRVideoPlayer-KRVideoPlayer-dummy.m"; sourceTree = "<group>"; };
+		550159E31D1A47FC00F44F15 /* kr-video-player-soundoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kr-video-player-soundoff@2x.png"; sourceTree = "<group>"; };
+		550159E41D1A47FC00F44F15 /* kr-video-player-soundoff@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kr-video-player-soundoff@3x.png"; sourceTree = "<group>"; };
+		550159E51D1A47FC00F44F15 /* kr-video-player-soundon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kr-video-player-soundon@2x.png"; sourceTree = "<group>"; };
+		550159E61D1A47FC00F44F15 /* kr-video-player-soundon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kr-video-player-soundon@3x.png"; sourceTree = "<group>"; };
 		5D08CBE92CDB828902A17FC9 /* Pods-KRVideoPlayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KRVideoPlayer-dummy.m"; sourceTree = "<group>"; };
 		5D3B6AACB979F2DA4D196512 /* KRVideoPlayer.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KRVideoPlayer.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		71A32742569C35D15B6F348F /* libPods-KRVideoPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KRVideoPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +169,10 @@
 		7AE0501C812DD0B5D27F5B34 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				550159E31D1A47FC00F44F15 /* kr-video-player-soundoff@2x.png */,
+				550159E41D1A47FC00F44F15 /* kr-video-player-soundoff@3x.png */,
+				550159E51D1A47FC00F44F15 /* kr-video-player-soundon@2x.png */,
+				550159E61D1A47FC00F44F15 /* kr-video-player-soundon@3x.png */,
 				055442B892151E10F55666F0 /* kr-video-player-close@2x.png */,
 				F0F81706D52CB108A1016A08 /* kr-video-player-close@3x.png */,
 				82A9F08C53225CA9AFCDB37B /* kr-video-player-fullscreen@2x.png */,
