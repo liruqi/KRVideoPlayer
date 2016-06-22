@@ -221,8 +221,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
 
 - (void)volumeButtonClick: (id) sender {
     if (sender != self.videoControl.volumeButton) return;
-    _soundOn = ! _soundOn;
-    self.videoControl.volumeButton.highlighted = _soundOn;
+    self.soundOn = ! _soundOn;
     if (self.soundChangedBlock) {
         self.soundChangedBlock(_soundOn);
     }
@@ -315,5 +314,9 @@ static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
     [self.videoControl layoutIfNeeded];
 }
 
-
+- (void)setSoundOn:(BOOL)soundOn {
+    _soundOn = soundOn;
+    [[MPMusicPlayerController applicationMusicPlayer] setVolume: soundOn ? 1 : 0];
+    self.videoControl.volumeButton.highlighted = _soundOn;
+}
 @end

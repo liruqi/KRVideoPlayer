@@ -64,7 +64,7 @@ static const CGFloat kVideoControlBarAutoFadeOutTimeInterval = 5.0;
     self.closeButton.frame = CGRectMake(CGRectGetWidth(self.topBar.bounds) - CGRectGetWidth(self.closeButton.bounds), CGRectGetMinX(self.topBar.bounds), CGRectGetWidth(self.closeButton.bounds), CGRectGetHeight(self.closeButton.bounds));
     self.bottomBar.frame = CGRectMake(CGRectGetMinX(self.bounds), CGRectGetHeight(self.bounds) - kVideoControlBarHeight, CGRectGetWidth(self.bounds), kVideoControlBarHeight);
     self.volumeButton.frame = CGRectMake(CGRectGetMinX(self.bottomBar.bounds), CGRectGetHeight(self.bottomBar.bounds)/2 - CGRectGetHeight(self.volumeButton.bounds)/2, CGRectGetWidth(self.volumeButton.bounds), CGRectGetHeight(self.volumeButton.bounds));
-    self.playButton.frame = CGRectMake(CGRectGetWidth(self.bounds)/2 - CGRectGetWidth(self.playButton.bounds), CGRectGetHeight(self.bounds)/2 - CGRectGetHeight(self.playButton.bounds)/2, CGRectGetWidth(self.playButton.bounds), CGRectGetHeight(self.playButton.bounds));
+    self.playButton.center = CGPointMake(CGRectGetWidth(self.bounds)/2, CGRectGetHeight(self.bounds)/2);
     self.pauseButton.frame = self.playButton.frame;
     self.fullScreenButton.frame = CGRectMake(CGRectGetWidth(self.bottomBar.bounds) - CGRectGetWidth(self.fullScreenButton.bounds), CGRectGetHeight(self.bottomBar.bounds)/2 - CGRectGetHeight(self.fullScreenButton.bounds)/2, CGRectGetWidth(self.fullScreenButton.bounds), CGRectGetHeight(self.fullScreenButton.bounds));
     self.shrinkScreenButton.frame = self.fullScreenButton.frame;
@@ -85,8 +85,10 @@ static const CGFloat kVideoControlBarAutoFadeOutTimeInterval = 5.0;
         return;
     }
     [UIView animateWithDuration:kVideoControlAnimationTimeInterval animations:^{
-        self.topBar.alpha = 0.0;
-        self.bottomBar.alpha = 0.0;
+        self.topBar.alpha = 0;
+        self.bottomBar.alpha = 0;
+        self.playButton.alpha = 0;
+        self.pauseButton.alpha = 0;
     } completion:^(BOOL finished) {
         self.isBarShowing = NO;
     }];
@@ -98,8 +100,10 @@ static const CGFloat kVideoControlBarAutoFadeOutTimeInterval = 5.0;
         return;
     }
     [UIView animateWithDuration:kVideoControlAnimationTimeInterval animations:^{
-        self.topBar.alpha = 1.0;
-        self.bottomBar.alpha = 1.0;
+        self.topBar.alpha = 1;
+        self.bottomBar.alpha = 1;
+        self.playButton.alpha = 1;
+        self.pauseButton.alpha = 1;
     } completion:^(BOOL finished) {
         self.isBarShowing = YES;
         [self autoFadeOutControlBar];
